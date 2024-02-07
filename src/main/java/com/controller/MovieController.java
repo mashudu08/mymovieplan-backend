@@ -17,39 +17,39 @@ import com.model.Movie;
 import com.service.MovieService;
 
 @RestController
-@RequestMapping("/movie")
+@RequestMapping("/movies")
 @CrossOrigin(origins = {"http://localhost:4200"})
 public class MovieController {
 	@Autowired
 	private MovieService ms;
 	
-	  @GetMapping
+	// get all movies
+	  @GetMapping("/get-movies")
 	  public List<Movie> retrieveAllMovies() 
 	  {
 		  return ms.read();
 	  }
 	  
-	  @GetMapping("/{id}")
+	  @GetMapping("/movies/{id}")
 	 public Movie findMovieById(@PathVariable("id") Integer id)
 	  {
 		  return ms.read(id);
 	  }
 	 
-	  @PostMapping
+	  // add movie as admin
+	  @PostMapping("/add-movie")
 	 public Movie addMovie(@RequestBody Movie movie) 
 	 {
 		  return ms.create(movie);
 	 }
 	 
-	  @PutMapping
+	  //update movie as admin
+	  @PutMapping("/update-movie")
 	 public Movie updateMovie(@RequestBody Movie movie) 
 	 {
 		  return ms.update(movie);
 	 }
 	 
-//	  @DeleteMapping("/{id}")
-//	 public Movie removeMovie(@PathVariable("id") Integer id)
-//	  {
-//		  return ms.delete(id);
-//	 }
+	  //TODO: fetch movies by category do in frontend
+	  
 }

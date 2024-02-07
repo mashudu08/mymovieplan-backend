@@ -15,47 +15,50 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.model.Booking;
 import com.service.BookingService;
-import com.service.UserService;
+//import com.service.UserService;
 
 @RestController
-@RequestMapping("/book")
+@RequestMapping("/bookings")
 @CrossOrigin(origins = {"http://localhost:4200"})
 public class BookingController {
 	@Autowired
 	private BookingService bs;
 
-	@Autowired
-	private UserService us;
+//	@Autowired
+//	private UserService userService;
 	
-	  @GetMapping("/movies")
+	// book a movie
+	@PostMapping("/add-booking")
+	public Booking addBookingToCart(@RequestBody Booking booking) 
+	{
+		return bs.create(booking);
+	}
+	  
+	// view all bookings
+	  @GetMapping("/get-bookings")
 	  public List<Booking> retrieveAllBookings() 
 	  {
 		  return bs.read();
 	  }
 	  
-	  @GetMapping("/movies/{id}")
+	  // view booking by id
+	  @GetMapping("/booking/{id}")
 	 public Booking findBookingById(@PathVariable("id") Integer id)
 	  {
 		  return bs.read(id);
 	  }
 	  
-	  //TODO: fetch movies by category
 	 
-	  @PostMapping("/")
-	 public Booking addBookingToCart(@RequestBody Booking booking) 
-	 {
-		  return bs.create(booking);
-	 }
-	 
-	  @PutMapping
+	  // update booking
+	  @PutMapping("/update-booking")
 	 public Booking updateBooking(@RequestBody Booking booking) 
 	 {
 		  return bs.update(booking);
 	 }
 	 
-	  @DeleteMapping("/{id}")
-	 public Booking removeBooking(@PathVariable("id") Integer id)
-	  {
-		  return bs.delete(id);
-	 }
+	  // delete/cancel booking
+		@DeleteMapping("/booking/{id}")
+		public Booking removeBooking(@PathVariable("id") Integer id) {
+			return bs.delete(id);
+		}
 }
