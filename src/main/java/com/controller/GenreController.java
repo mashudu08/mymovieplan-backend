@@ -9,33 +9,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model.User;
-import com.service.UserService;
+import com.model.Genre;
+import com.service.GenreService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/genre")
 @CrossOrigin(origins = {"http://localhost:4200"})
-public class UserController {
-	
+public class GenreController {
 	@Autowired
-	private UserService userService;
+	private GenreService genreService;
 	
 	//create user
-	@PostMapping("/register")
-	public User addUser(@RequestBody User user) 
+	@PostMapping("/add-genre")
+	public Genre addUser(@RequestBody Genre genre) 
 	{
-		return userService.create(user);
+		return genreService.create(genre);
 	}
 	
 	//get user by id
-	 @GetMapping("/user/{id}")
-	 public User findUserById(@PathVariable("id") Integer id)
+	 @GetMapping("/genre/{id}")
+	 public Genre findUserById(@PathVariable("id") Integer id)
 	  {
-		  return userService.read(id);
+		  return genreService.read(id);
 	  }
-	
-	
-	// TODO authenticate for login and sign up
-    // TODO sign up create user
-	//TODO login get user by passing the password and user name
 }

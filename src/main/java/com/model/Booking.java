@@ -2,18 +2,33 @@ package com.model;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer bookingId;
-	private Integer userId;
-	private Integer movieId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="userId", referencedColumnName = "userId")
+	
+	private User user;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="movieId", referencedColumnName = "movieId")
+	
+	private Movie movie;
+	
 	private Integer quantity;
 	private String paymentStatus;
 	private LocalDateTime bookingDate;
@@ -23,12 +38,12 @@ public class Booking {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Booking(Integer bookingId, Integer userId, Integer movieId, Integer quantity, String paymentStatus,
+	public Booking(Integer bookingId, User user, Movie movie, Integer quantity, String paymentStatus,
 			LocalDateTime bookingDate) {
 		super();
 		this.bookingId = bookingId;
-		this.userId = userId;
-		this.movieId = movieId;
+		this.user = user;
+		this.movie = movie;
 		this.quantity = quantity;
 		this.paymentStatus = paymentStatus;
 		this.bookingDate = bookingDate;
@@ -42,20 +57,20 @@ public class Booking {
 		this.bookingId = bookingId;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Integer getMovieId() {
-		return movieId;
+	public Movie getMovie() {
+		return movie;
 	}
 
-	public void setMovieId(Integer movieId) {
-		this.movieId = movieId;
+	public void setMovie(Movie movie) {
+		this.movie = movie;
 	}
 
 	public Integer getQuantity() {
@@ -84,9 +99,7 @@ public class Booking {
 
 	@Override
 	public String toString() {
-		return "Booking [bookingId=" + bookingId + ", userId=" + userId + ", movieId=" + movieId + ", quantity="
-				+ quantity + ", paymentStatus=" + paymentStatus + ", bookingDate=" + bookingDate + "]";
+		return "Booking [bookingId=" + bookingId + ", user=" + user + ", movie=" + movie + ", quantity=" + quantity
+				+ ", paymentStatus=" + paymentStatus + ", bookingDate=" + bookingDate + "]";
 	}
-	
-	
 }

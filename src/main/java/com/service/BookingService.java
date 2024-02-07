@@ -13,50 +13,47 @@ import com.repository.BookingRepository;
 public class BookingService {
 	@Autowired
 	private BookingRepository br;
-	
-	//create
+
+	// create
 	public Booking create(Booking booking) {
 		return br.save(booking);
 	}
-	
-	//read all
-		public List<Booking> read(){
-			return br.findAll();
+
+	// read all
+	public List<Booking> read() {
+		return br.findAll();
+	}
+
+	// read by id
+	public Booking read(Integer id) {
+		Optional<Booking> temp = br.findById(id);
+		Booking booking = null;
+		if (temp.isPresent()) {
+			booking = temp.get();
 		}
-		
-		// read by id
-		public Booking read(Integer id) {
-			Optional<Booking> temp = br.findById(id);
-			Booking booking = null;
-			if(temp.isPresent())
-			{
-				booking = temp.get();
-			}
+		return booking;
+	}
+
+	// update
+	public Booking update(Booking booking) {
+		Optional<Booking> temp = br.findById(booking.getBookingId());
+		if (temp.isPresent()) {
+			br.save(booking);
 			return booking;
 		}
-		
-		//update 
-		public Booking update(Booking booking) {
-			Optional<Booking> temp = br.findById(booking.getBookingId());  
-			if(temp.isPresent())
-			{
-				br.save(booking);
-				return booking;
-			}
-				return null;
-			
+		return null;
+
+	}
+
+	// delete/cancel booking
+	public Booking delete(Integer id) {
+		Optional<Booking> temp = br.findById(id);
+		Booking booking = null;
+		if (temp.isPresent()) {
+			booking = temp.get();
+			br.delete(booking);
 		}
-		
-		// delete/cancel booking
-		public Booking delete(Integer id) {
-			Optional<Booking> temp = br.findById(id);  
-			Booking booking = null;
-			if(temp.isPresent())
-			{
-				booking = temp.get();
-				br.delete(booking);
-			}
-				return booking;
-			
-		}
+		return booking;
+
+	}
 }

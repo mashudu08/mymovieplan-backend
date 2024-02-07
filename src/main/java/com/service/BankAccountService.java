@@ -37,7 +37,7 @@ public class BankAccountService {
 		
 		//update 
 		public BankAccount update(BankAccount bank) {
-			Optional<BankAccount> temp = ba.findById(bank.getUserId());  
+			Optional<BankAccount> temp = ba.findById(bank.getUser().getUserId());  
 			if(temp.isPresent())
 			{
 				ba.save(bank);

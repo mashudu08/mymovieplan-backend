@@ -14,26 +14,37 @@ public class GenreService {
 
 	@Autowired
 	private GenreRepository gr;
-	
-	//create 
+
+	// create
 	public Genre create(Genre genre) {
 		return gr.save(genre);
 	}
-	
-	//read all 
+
+	// read all
 	public List<Genre> readAll() {
 		return gr.findAll();
 	}
-	
+
 	// read by id
 	public Genre read(Integer id) {
 		Optional<Genre> temp = gr.findById(id);
 		Genre genre = null;
-		if(temp.isPresent())
-		{
+		if (temp.isPresent()) {
 			genre = temp.get();
 		}
 		return genre;
 	}
-	
+
+	// delete
+	public Genre delete(Integer id) {
+		Optional<Genre> temp = gr.findById(id);
+		Genre genre = null;
+		if (temp.isPresent()) {
+			genre = temp.get();
+			gr.delete(genre);
+		}
+		return genre;
+
+	}
+
 }
