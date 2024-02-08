@@ -19,9 +19,10 @@ public class Movie {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="genreId", referencedColumnName = "genreId")
 	private Genre genre;
+	
 	private String movieName;
 	private Integer ticketPrice;
-	private String langauge;
+	private String language;
 	private String description;
 	private String showTimings;
 	private boolean enabled;
@@ -38,7 +39,7 @@ public class Movie {
 		this.genre = genre;
 		this.movieName = movieName;
 		this.ticketPrice = ticketPrice;
-		this.langauge = langauge;
+		this.language = language;
 		this.description = description;
 		this.showTimings = showTimings;
 		this.enabled = enabled;
@@ -76,12 +77,12 @@ public class Movie {
 		this.ticketPrice = ticketPrice;
 	}
 
-	public String getLangauge() {
-		return langauge;
+	public String getLanguage() {
+		return language;
 	}
 
-	public void setLangauge(String langauge) {
-		this.langauge = langauge;
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 	public String getDescription() {
@@ -111,7 +112,7 @@ public class Movie {
 	@Override
 	public String toString() {
 		return "Movie [movieId=" + movieId + ", genre=" + genre + ", movieName=" + movieName + ", ticketPrice="
-				+ ticketPrice + ", langauge=" + langauge + ", description=" + description + ", showTimings="
+				+ ticketPrice + ", language=" + language + ", description=" + description + ", showTimings="
 				+ showTimings + ", enabled=" + enabled + "]";
 	}
 
