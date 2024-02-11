@@ -1,38 +1,34 @@
 package com.model;
 
+import com.enums.Genre;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Movie {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer movieId;
-	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="genreId", referencedColumnName = "genreId")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Genre genre;
-	
 	private String movieName;
 	private Integer ticketPrice;
 	private String language;
 	private String description;
 	private String showTimings;
 	private boolean enabled;
+	private String image;
 	
 	public Movie() {
 		super();
 		// constructor without the movie id
 	}
 
-	public Movie(Integer movieId, Genre genre, String movieName, Integer ticketPrice, String langauge,
+	public Movie(Integer movieId, Genre genre, String movieName, Integer ticketPrice, String language,
 			String description, String showTimings, boolean enabled) {
 		super();
 		this.movieId = movieId;
@@ -108,12 +104,19 @@ public class Movie {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	@Override
 	public String toString() {
 		return "Movie [movieId=" + movieId + ", genre=" + genre + ", movieName=" + movieName + ", ticketPrice="
 				+ ticketPrice + ", language=" + language + ", description=" + description + ", showTimings="
-				+ showTimings + ", enabled=" + enabled + "]";
+				+ showTimings + ", enabled=" + enabled + ", image=" +image +"]";
 	}
 
 	

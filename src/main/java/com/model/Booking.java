@@ -2,7 +2,7 @@ package com.model;
 
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -21,14 +21,11 @@ public class Booking {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="userId", referencedColumnName = "userId")
-	
 	private User user;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="movieId", referencedColumnName = "movieId")
-	
 	private Movie movie;
-	
 	private Integer quantity;
 	private String paymentStatus;
 	private LocalDateTime bookingDate;
