@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.model.Cart;
-import com.model.Movie;
+
 import com.repository.CartRepository;
 
 @Service
@@ -26,16 +26,6 @@ public class CartService {
 		return cr.findAll();
 	}
 
-	// read by id
-//	public Cart read1(Integer id) {
-//		Optional<Cart> temp = cr.findById(id);
-//		Cart cart = null;
-//		if(temp.isPresent())
-//		{
-//			cart = temp.get();
-//		}
-//		return cart;
-//	}
 	// update
 	public Cart update(Cart cart) {
 		Optional<Cart> temp = cr.findById(cart.getCartId());
